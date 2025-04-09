@@ -1,2 +1,2 @@
 # prime_graphs
-some code for what we did it the paper
+some code for what we did in the paper
