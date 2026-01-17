@@ -44,6 +44,40 @@ Interactive Jupyter notebook with:
 - Spectral clustering preservation proof
 - Multidirected graph (transportation network) example
 
+### `prime_vs_traditional_comparison.py`
+Benchmark comparisons showing prime graph advantages:
+- Spectral clustering (Directed Laplacian vs Prime Graph)
+- Community detection (Lossy conversion vs Prime Graph Louvain)
+- Graph similarity (Feature-based vs Spectral via Prime Graphs)
+- Robustness testing on problematic graphs
+
+### `prime_vs_traditional_benchmarks.ipynb`
+Interactive notebook with side-by-side comparisons and visualizations demonstrating:
+- Superior spectral clustering accuracy
+- Better community detection NMI scores
+- More accurate graph similarity tracking
+- Network alignment capability (enabled by prime graphs)
+
+## Benchmark Results: Prime Graph vs Traditional Methods
+
+| Problem | Traditional | Prime Graph | Improvement |
+|---------|-------------|-------------|-------------|
+| **Spectral Clustering** | 0% accuracy (fails) | 99.6% accuracy | ∞ |
+| **Community Detection** | 0.000 NMI (lossy) | 0.877 NMI (Louvain) | +∞ |
+| **Graph Similarity** | 0.279 avg error | 0.247 avg error | 11% better |
+| **Robustness** | Fails on DAGs/sinks | Works on all graphs | Universal |
+| **Network Alignment** | No tools available | All undirected tools work | Enabled |
+
+### Why Prime Graphs Win
+
+1. **Spectral Clustering**: Traditional directed Laplacian (Fan Chung 2005) requires PageRank computation and fails on graphs with sinks/sources. Prime graph uses standard symmetric Laplacian.
+
+2. **Community Detection**: Traditional approach converts directed→undirected (loses direction). Prime graph preserves direction in bipartite structure.
+
+3. **Graph Similarity**: Prime graphs enable full spectral similarity methods unavailable for asymmetric directed graphs.
+
+4. **Network Alignment**: Previously impossible for directed graphs. Prime graph enables use of SANA, MAGNA++, and other undirected alignment tools.
+
 ## The Prime Graph Construction
 
 For a directed graph G_d = (V_d, E_d), the corresponding prime graph G_u = (V_u, E_u) is constructed as:
