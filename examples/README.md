@@ -53,30 +53,54 @@ Benchmark comparisons showing prime graph advantages:
 
 ### `prime_vs_traditional_benchmarks.ipynb`
 Interactive notebook with side-by-side comparisons and visualizations demonstrating:
-- Superior spectral clustering accuracy
-- Better community detection NMI scores
-- More accurate graph similarity tracking
+- Spectral clustering comparisons
+- Community detection NMI scores
+- Graph similarity tracking
 - Network alignment capability (enabled by prime graphs)
 
-## Benchmark Results: Prime Graph vs Traditional Methods
+### `prime_graph_realistic_benchmarks.py`
+**Honest assessment** of when prime graphs help vs traditional methods:
+- Network alignment (GENUINE WIN - enables new capability)
+- Algorithm availability (expands options for directed data)
+- Direction preservation (for asymmetric networks)
+- Extreme structure handling (sinks/sources)
 
-| Problem | Traditional | Prime Graph | Improvement |
-|---------|-------------|-------------|-------------|
-| **Spectral Clustering** | 0% accuracy (fails) | 99.6% accuracy | ∞ |
-| **Community Detection** | 0.000 NMI (lossy) | 0.877 NMI (Louvain) | +∞ |
-| **Graph Similarity** | 0.279 avg error | 0.247 avg error | 11% better |
-| **Robustness** | Fails on DAGs/sinks | Works on all graphs | Universal |
-| **Network Alignment** | No tools available | All undirected tools work | Enabled |
+## When Do Prime Graphs Help? (Honest Assessment)
 
-### Why Prime Graphs Win
+### Genuine Advantages
 
-1. **Spectral Clustering**: Traditional directed Laplacian (Fan Chung 2005) requires PageRank computation and fails on graphs with sinks/sources. Prime graph uses standard symmetric Laplacian.
+| Capability | Traditional | Prime Graph | Status |
+|------------|-------------|-------------|--------|
+| **Network Alignment** | No tools for directed graphs | All undirected tools work | **ENABLED** - New capability |
+| **Algorithm Availability** | Limited to directed-specific algos | All undirected algorithms | **EXPANDED** - More options |
+| **Direction Preservation** | Lossy (undirected loses direction) | Lossless (bipartite encoding) | **PRESERVED** - Important for asymmetric networks |
+| **Theoretical Foundation** | Ad-hoc methods | Categorical isomorphism (DGraph ≅ PGraph) | **ELEGANT** - Rigorous proofs |
 
-2. **Community Detection**: Traditional approach converts directed→undirected (loses direction). Prime graph preserves direction in bipartite structure.
+### Honest Limitations
 
-3. **Graph Similarity**: Prime graphs enable full spectral similarity methods unavailable for asymmetric directed graphs.
+| Scenario | Reality |
+|----------|---------|
+| Simple, well-structured graphs | Both methods often work equally well |
+| Modern directed methods | Handle sinks/sources via teleportation |
+| Community detection on clear structures | Both methods find the same communities |
+| Spectral clustering | Results depend on specific graph structure |
+| Graph size | Prime graphs have 2× nodes |
 
-4. **Network Alignment**: Previously impossible for directed graphs. Prime graph enables use of SANA, MAGNA++, and other undirected alignment tools.
+### Bottom Line
+
+- **Most valuable for ENABLING new analyses** (like network alignment for directed graphs)
+- For standard tasks, advantages depend on specific graph structure
+- The theoretical foundation is solid; practical benefits are situational
+
+### Why Prime Graphs Are Useful
+
+1. **Network Alignment**: Previously impossible for directed graphs. Prime graph enables use of SANA, MAGNA++, and other undirected alignment tools.
+
+2. **Algorithm Availability**: Many powerful graph algorithms only exist for undirected graphs (MST, graph coloring, maximum matching, planarity testing). Prime graphs unlock these for directed data.
+
+3. **Direction Preservation**: Unlike lossy undirected conversion, prime graphs encode direction in their bipartite structure, enabling perfect recovery.
+
+4. **Theoretical Rigor**: The categorical isomorphism (Theorem 4) provides a mathematically elegant and provably correct transformation.
 
 ## The Prime Graph Construction
 
