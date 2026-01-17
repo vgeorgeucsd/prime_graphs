@@ -997,6 +997,48 @@ def run_all_benchmarks(n_nodes: int = 50, n_trials: int = 3, verbose: bool = Tru
    - Always produces valid undirected bipartite graph
 """)
 
+    # Final Results Summary Table
+    if verbose:
+        print("\n" + "="*70)
+        print("FINAL RESULTS SUMMARY TABLE")
+        print("="*70)
+        print(f"\n{'Metric':<40} {'Traditional':<15} {'Prime Graph':<15}")
+        print("-" * 70)
+
+        # Spectral clustering
+        if spectral_results['traditional']:
+            trad_spec = f"{np.mean(spectral_results['traditional']):.1%}"
+        else:
+            trad_spec = "FAILED"
+        if spectral_results['prime_graph']:
+            prime_spec = f"{np.mean(spectral_results['prime_graph']):.1%}"
+        else:
+            prime_spec = "FAILED"
+        print(f"{'Spectral Clustering Accuracy':<40} {trad_spec:<15} {prime_spec:<15}")
+
+        # Community detection
+        if community_results['traditional_lossy']:
+            trad_comm = f"{np.mean(community_results['traditional_lossy']):.3f}"
+        else:
+            trad_comm = "N/A"
+        if community_results['prime_louvain']:
+            prime_comm = f"{np.mean(community_results['prime_louvain']):.3f}"
+        else:
+            prime_comm = "N/A"
+        print(f"{'Community Detection NMI':<40} {trad_comm:<15} {prime_comm:<15}")
+
+        # Graph similarity error
+        trad_sim = f"{np.mean(similarity_errors['traditional']):.3f}"
+        prime_sim = f"{np.mean(similarity_errors['prime_graph']):.3f}"
+        print(f"{'Graph Similarity Error (lower=better)':<40} {trad_sim:<15} {prime_sim:<15}")
+
+        # Robustness
+        print(f"{'Robustness (problematic graphs)':<40} {trad_success}/{len(prob_results):<14} {prime_success}/{len(prob_results):<15}")
+
+        print("-" * 70)
+        print("\nNOTE: Results may vary based on random graph generation.")
+        print("Run multiple times to see consistent patterns.")
+
     return {
         'spectral': spectral_results,
         'community': community_results,
@@ -1010,4 +1052,9 @@ def run_all_benchmarks(n_nodes: int = 50, n_trials: int = 3, verbose: bool = Tru
 # =============================================================================
 
 if __name__ == "__main__":
-    run_all_benchmarks(n_nodes=50, n_trials=5)
+    results = run_all_benchmarks(n_nodes=50, n_trials=5)
+
+    # Print final table for easy copying
+    print("\n")
+    print("Copy this table for your records:")
+    print("-" * 50)
